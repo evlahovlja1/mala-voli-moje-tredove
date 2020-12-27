@@ -36,46 +36,31 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(stackPane, 300, 275));
         primaryStage.show();
 
-        Task<String> getFromServer = new Task<String>() {
-            @Override
-            protected String call() throws Exception {
-                String ret = "";
-                try {
-                    URL url = new URL("http://localhost:8080/greet?name=Elvir");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("GET");
-                    conn.setRequestProperty("Accept", "application/json");
+        try {
+            URL url = new URL("http://localhost:8080/greet?name=Elvir");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
 
-                    if (conn.getResponseCode() != 200) {
-                        throw new RuntimeException("HTTP GET Failed: " + conn.getResponseMessage());
-                    }
-
-                    InputStreamReader in = new InputStreamReader(conn.getInputStream());
-                    BufferedReader br = new BufferedReader(in);
-                    String output;
-
-                    while ((output = br.readLine()) != null) {
-                        ret += output;
-                    }
-
-                    conn.disconnect();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return ret;
+            if (conn.getResponseCode() != 200) {
+                throw new RuntimeException("HTTP GET Failed: " + conn.getResponseMessage());
             }
-        };
 
-        getFromServer.setOnSucceeded(e -> {
-            lbl.setText(getFromServer.getValue());
-        });
+            InputStreamReader in = new InputStreamReader(conn.getInputStream());
+            BufferedReader br = new BufferedReader(in);
+            String output;
 
+            while ((output = br.readLine()) != null) {
+                lbl.setText(lbl.getText() + output);
 
-        Thread t = new Thread(getFromServer);
-        t.setDaemon(true);
-        t.start();
+            }
+
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
