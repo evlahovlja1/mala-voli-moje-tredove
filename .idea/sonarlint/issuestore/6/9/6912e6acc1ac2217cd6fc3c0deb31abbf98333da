@@ -1,0 +1,8 @@
+
+G
+java:S1068"%Remove this unused "i" private field.(έ¶ρωÿÿÿÿ8Φ†ά‰κ.
+C
+java:S1659"!Declare "max" on a separate line.(έ¶ρωÿÿÿÿ8λÒ‰κ.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(¶ψωÿÿÿÿ8ρΖζ‰κ.
+h
+java:S2142"FEither re-interrupt this method or rethrow the "InterruptedException".(²ύ…¦ϋÿÿÿÿ8Ηφ‰κ.
