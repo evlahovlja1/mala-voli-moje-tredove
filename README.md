@@ -1,0 +1,1 @@
+Najosnovniji moguci Spring API server za potrebe ovog mini "projekta".
